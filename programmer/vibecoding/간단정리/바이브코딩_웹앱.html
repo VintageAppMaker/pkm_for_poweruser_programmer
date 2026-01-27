@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown Preview (Live)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown-light.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<style>
+  html,body{height:100%;margin:0}
+  body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif; margin: 0; padding: 2em; background: #fafbfc;}
+  .markdown-body img {
+    width: 90%;
+    border-radius: 16px;
+    box-shadow: 0 2px 5px #0003;
+    display: block;
+    margin: 1em auto;
+  }
+  pre code.hljs {
+    border-radius: 8px;
+    padding: 1em;
+    font-size: 1em;
+  }
+</style>
+</head>
+<body>
+<div id="app" class="markdown-body"><h1>웹앱 바이브 코딩 수칙</h1>
+<p>반드시 지켜야 할 프롬프트 문체</p>
+<blockquote>
+<p>❝ 정답을 묻지 말고, 지금 만들 것을 지시하라 ❞</p>
+</blockquote>
+<ul>
+<li>틀린사례: “가장 좋은 방법으로 만들어줘”</li>
+<li>실질사례: “OO를 OO 방법으로 만들어줘”</li>
+</ul>
+<p><code>바이브 코딩은 인간의 말로 전달하는 프로그래밍 명령</code>이다. 대화가 아니다. </p>
+<h2>1. 수칙:</h2>
+<p>다음은 <strong>HTML + JavaScript 기반의 간단한 웹앱을 ‘바이브 코딩(vibe coding)’ 방식</strong>으로 만들 때 실무적으로 바로 사용가능한 <strong>행동 수칙(checklist)</strong> </p>
+<h3>1.1 파일 수칙 – “1개의 HTML 파일로 만들어라.”</h3>
+<pre><code class="language-html">&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;h1&gt;Vibe App&lt;/h1&gt;
+  &lt;script&gt;
+    console.log(&#39;start&#39;);
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3>1.2  구조 수칙 – “이해 가능한 쉬운 구조로 만들어라”</h3>
+<pre><code class="language-html">&lt;!-- HTML = 구조 --&gt;
+&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+// state
+let count = 0;
+
+// logic
+function increase() {
+  count++;
+  render();
+}
+
+// view
+function render() {
+  document.getElementById(&#39;app&#39;).innerHTML = `
+    &lt;p&gt;${count}&lt;/p&gt;
+    &lt;button onclick=&quot;increase()&quot;&gt;+&lt;/button&gt;
+  `;
+}
+
+render();
+&lt;/script&gt;
+</code></pre>
+<h3>1.3 CSS 수칙 – “OO색, OO구조, OO 테마로 CSS 적용해라”</h3>
+<pre><code class="language-css">body {
+  font-family: system-ui;
+  padding: 20px;
+}
+
+button {
+  padding: 8px 12px;
+}
+</code></pre>
+<h3>1.4  데이터 수칙 – “모든 자료형태는 JSON으로 만들어줘”</h3>
+<pre><code class="language-js">const data = [
+  { id: 1, title: &#39;idea&#39; },
+  { id: 2, title: &#39;vibe&#39; }
+];
+</code></pre>
+<h3>1.5  저장수칙  - &quot;localstorage로 저장해줘&quot;</h3>
+<pre><code class="language-js">localStorage.setItem(&#39;memo&#39;, text);
+</code></pre>
+<h3>1.5  버그추적 수칙 – “console.log로 과정을 출력해줘!”</h3>
+<pre><code class="language-js">console.log(state);
+console.table(state.todos);
+alert(&#39;여기까지 옴&#39;);
+</code></pre>
+<h2>2. 프롬프트 구조</h2>
+<h3>프롬프트 권장구조</h3>
+<pre><code class="language-text">[역할]
+[목적]
+[제약]
+[출력 형식]
+[행동 지침]
+</code></pre>
+<p>이 5개 블록만 있으면 <strong>바이브 코딩 프롬프트는 90% 완성</strong>이다.</p>
+<h4>역할 (Role)</h4>
+<p><strong>AI의 성격을 제한한다 (중요)</strong></p>
+<pre><code class="language-text">너는 빠르게 프로토타입을 만드는 프론트엔드 보조 개발자다.
+</code></pre>
+<p>또는</p>
+<pre><code class="language-text">너는 설계 설명 없이 바로 코드를 출력하는 HTML/JS 코딩 파트너다.
+</code></pre>
+<p>포인트</p>
+<ul>
+<li>“설명가” X</li>
+<li>“코딩 파트너” O</li>
+</ul>
+<h3>목적 (Goal)</h3>
+<p> <strong>지금 만들 ‘결과물’을 한 문장으로 고정</strong></p>
+<pre><code class="language-text">HTML과 JavaScript만 사용해
+버튼을 누르면 숫자가 증가하는 간단한 웹앱을 만든다.
+</code></pre>
+<p>포인트</p>
+<ul>
+<li>기능 1~2개만</li>
+<li>“예제”라는 말 쓰지 말 것 (완성물로 인식시킴)</li>
+</ul>
+<h3>제약 (Constraints)</h3>
+<p>바이브 코딩의 분위기를 강제하는 부분</p>
+<pre><code class="language-text">- 단일 HTML 파일로 만든다
+- 프레임워크 사용 금지
+- 서버 없이 file:// 환경에서도 동작해야 한다
+- ES6까지만 사용한다
+</code></pre>
+<p>이 블록이 없으면 → <strong>설명 많아지고, 구조 과잉</strong></p>
+<h3>출력 형식 (Output Format)</h3>
+<pre><code class="language-text">- 설명 없이 전체 HTML 코드만 출력한다
+- 마크다운 설명 금지
+- 코드블록 하나로 출력한다
+</code></pre>
+<p>또는</p>
+<pre><code class="language-text">- [HTML 코드]
+- [아래에 5줄 이내 사용법]
+</code></pre>
+<h3>행동 지침 (Behavior Rules)</h3>
+<p>바이브의 맥락을 유지시키는 가이드</p>
+<pre><code class="language-text">- 단순함을 최우선으로 한다
+- 가독성이 좋으면 구조는 거칠어도 된다
+- 돌아가기만 하면 성공으로 간주한다
+</code></pre>
+<h2>3.  바이브 코딩 프롬프트 템플릿</h2>
+<h3>기초 템플릿 예제</h3>
+<pre><code class="language-text">너는 빠르게 작동하는 프로토타입을 만드는 코딩 파트너다.
+
+[목적]
+HTML과 JavaScript만 사용해 ○○ 기능을 가진 간단한 웹앱을 만든다.
+
+[제약]
+- 단일 HTML 파일
+- 외부 라이브러리 금지
+- file:// 환경에서도 동작
+
+[출력]
+- 설명 없이 전체 HTML 코드만 출력
+
+[지침]
+- 단순함과 가독성을 우선
+- 설계 설명은 하지 않는다
+</code></pre>
+<h3>“좋은 프롬프트 vs 나쁜 프롬프트” 구조 비교</h3>
+<h4>나쁜 구조</h4>
+<pre><code class="language-text">HTML과 JS로 좋은 예제를 만들어줘
+최적화도 고려해줘
+</code></pre>
+<p>문제점</p>
+<ul>
+<li>목표 불명확</li>
+<li>“좋은”이라는 추상어</li>
+<li>과설계 유도</li>
+</ul>
+<h4>좋은 구조</h4>
+<pre><code class="language-text">너는 빠르게 결과를 만드는 코딩 파트너다.
+
+HTML과 JavaScript만 사용해
+버튼 클릭 시 메시지를 화면에 출력하는 웹앱을 만든다.
+
+- 단일 HTML 파일
+- 설명 없이 코드만 출력
+</code></pre>
+<h3>바이브 코딩 전용 키워드 사전 (자주 쓰면 효과 좋음)</h3>
+<p>프롬프트에 아래 단어를 <strong>의도적으로 섞으면 결과가 달라진다</strong></p>
+<table>
+<thead>
+<tr>
+<th>키워드</th>
+<th>효과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>바로 동작하는</td>
+<td>설계 최소화</td>
+</tr>
+<tr>
+<td>단일 파일</td>
+<td>구조 단순화</td>
+</tr>
+<tr>
+<td>설명 없이</td>
+<td>코드 집중</td>
+</tr>
+<tr>
+<td>프로토타입</td>
+<td>완성 강박 제거</td>
+</tr>
+<tr>
+<td>거칠어도 된다</td>
+<td>바이브 유지</td>
+</tr>
+<tr>
+<td>빠르게</td>
+<td>속도 우선</td>
+</tr>
+</tbody></table>
+<h3>단계형 바이브 프롬프트 구조 (실전에서 많이 씀)</h3>
+<pre><code class="language-text">1단계: 바로 실행되는 최소 기능만 만든다
+2단계: 같은 코드에서 기능 하나만 추가한다
+3단계: 필요하면 정리한다
+</code></pre>
+<p>이렇게 쓰면 <strong>대화 자체가 바이브 코딩 세션</strong>이 된다.</p>
+<h3>바이브 코딩 프롬프트의 본질 (요약)</h3>
+<table>
+<thead>
+<tr>
+<th>일반 프롬프트</th>
+<th>바이브 코딩 프롬프트</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>“어떻게가 좋은가”</td>
+<td>“지금 뭘 만들까”</td>
+</tr>
+<tr>
+<td>설명 중심</td>
+<td>결과물 중심</td>
+</tr>
+<tr>
+<td>정답 탐색</td>
+<td>즉시 실행</td>
+</tr>
+<tr>
+<td>설계 먼저</td>
+<td>화면 먼저</td>
+</tr>
+</tbody></table>
+<h3>한 문장으로 요약</h3>
+<blockquote>
+<p><strong>바이브 코딩 프롬프트는<br>“설계 요청서”가 아니라<br>“지금 당장 만들 작업 지시서”다.</strong></p>
+</blockquote>
+<h2>4. 활용예제</h2>
+<p>아래의 프롬프트를 복사하여, 구글 크롬창에 붙여넣기 하면 Google AI 검색모드가 코드로 만들어준다. 가장 빠르고 편리하며 강력한 방법이다. </p>
+<h3>버튼 클릭 카운터 (가장 기본)</h3>
+<pre><code class="language-text">너는 빠르게 작동하는 프로토타입을 만드는 코딩 파트너다.
+
+HTML과 JavaScript만 사용해
+버튼을 누를 때마다 숫자가 증가하는 간단한 웹앱을 만든다.
+
+제약:
+- 단일 HTML 파일
+- 외부 라이브러리 금지
+- file:// 환경에서도 동작
+
+출력:
+- 설명 없이 전체 HTML 코드만 출력
+
+지침:
+- 단순함과 가독성을 우선한다
+</code></pre>
+<h3>오늘 할 일 3개 체크 화면</h3>
+<pre><code class="language-text">너는 설계 설명 없이 바로 화면을 만드는 코딩 파트너다.
+
+HTML과 JavaScript로
+체크박스 3개가 있는 오늘 할 일 화면을 만든다.
+체크하면 취소선이 그어진다.
+
+제약:
+- 단일 HTML 파일
+- CSS는 최소한만 사용
+- localStorage는 사용하지 않는다
+
+출력:
+- 전체 HTML 코드만 출력
+</code></pre>
+<h3>텍스트 입력 → 화면에 카드 생성</h3>
+<pre><code class="language-text">HTML과 JavaScript만 사용해
+입력창에 글을 쓰고 버튼을 누르면
+아래에 카드 형태로 추가되는 화면을 만든다.
+
+조건:
+- 카드에는 입력한 텍스트만 표시
+- 새로고침하면 초기화되어도 된다
+- 단일 HTML 파일
+
+출력:
+- 코드만 출력
+</code></pre>
+<h3>URL 파라미터 → 화면 표시</h3>
+<pre><code class="language-text">너는 빠르게 결과를 보여주는 HTML/JS 파트너다.
+
+file:///index.html?title=약속&amp;msg=점심12시
+형식의 URL 파라미터를 읽어
+화면에 제목과 내용을 출력하는 페이지를 만든다.
+
+제약:
+- 서버 사용 금지
+- 단일 HTML 파일
+
+출력:
+- 전체 HTML 코드만 출력
+</code></pre>
+<h3>localStorage 메모장</h3>
+<pre><code class="language-text">HTML과 JavaScript로
+간단한 메모 입력 화면을 만든다.
+
+기능:
+- 입력 후 저장 버튼 클릭
+- 새로고침해도 메모 유지
+
+제약:
+- localStorage만 사용
+- UI는 최소 구성
+- 단일 HTML 파일
+
+출력:
+- 코드만 출력
+</code></pre>
+<h3>날짜 선택 + 텍스트 표시 화면</h3>
+<pre><code class="language-text">HTML과 JavaScript로
+날짜 선택 input과 텍스트 입력창이 있는 화면을 만든다.
+
+버튼을 누르면
+선택한 날짜와 내용을 아래에 정리해서 보여준다.
+
+제약:
+- 단일 HTML 파일
+- 디자인은 기본만
+
+출력:
+- 전체 HTML 코드
+</code></pre>
+<h3>클릭 시 색상 변경 박스</h3>
+<pre><code class="language-text">HTML과 JavaScript만 사용해
+사각형 박스를 클릭할 때마다
+색상이 순환해서 바뀌는 화면을 만든다.
+
+조건:
+- 색상은 3가지 이상
+- 코드 단순하게 작성
+
+출력:
+- 설명 없이 HTML 코드만
+</code></pre>
+<h3>숫자 입력 → 계산 결과 표시</h3>
+<pre><code class="language-text">HTML과 JavaScript로
+숫자 두 개를 입력하면
+합계를 바로 화면에 보여주는 간단한 계산기를 만든다.
+
+제약:
+- 버튼 하나만 사용
+- 단일 HTML 파일
+
+출력:
+- 코드만 출력
+</code></pre>
+<h3>프린트 전용 한 페이지 문서</h3>
+<pre><code class="language-text">HTML과 JavaScript로
+제목과 내용을 입력하면
+프린트용 한 페이지 문서 형태로 보여주는 화면을 만든다.
+
+조건:
+- 화면은 심플
+- print 시 불필요한 버튼은 숨긴다
+
+출력:
+- 전체 HTML 코드만 출력
+</code></pre>
+<h3>“오늘의 문장” 랜덤 표시기</h3>
+<pre><code class="language-text">HTML과 JavaScript로
+미리 정의된 문장 목록 중 하나를
+버튼 클릭 시 랜덤으로 보여주는 화면을 만든다.
+
+제약:
+- 문장은 JS 배열로 하드코딩
+- 단일 HTML 파일
+
+출력:
+- 코드만 출력
+</code></pre>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  function highlightCodeBlocks(root) {
+    root.querySelectorAll('pre code').forEach(block => {
+      hljs.highlightElement(block);
+    });
+  }
+
+  async function setContent(html) {
+    const root = document.getElementById('app');
+    root.innerHTML = html;
+    // 코드 블록 하이라이트 적용
+    highlightCodeBlocks(root);
+  }
+
+  // 최초 로딩
+  highlightCodeBlocks(document);
+
+  fetch('/content', { cache: 'no-store' })
+    .then(r => r.text())
+    .then(setContent);
+
+  // SSE로 실시간 업데이트
+  const evtSource = new EventSource('/events');
+  evtSource.onmessage = function(event) {
+    try {
+      const data = JSON.parse(event.data);
+      if (data.type === 'refresh') setContent(data.html);
+    } catch {}
+  };
+</script>
+</body>
+</html>
